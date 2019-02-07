@@ -2,14 +2,23 @@
 
 My development environment
 
+## Support platform
+
+- OSX
+
 ## Requirements
 
-- VirtualBox
-- Vagrant
+- Homebrew
+- Make
 
 ## Setup
 
 ```bash
-$ vagrant up
-$ vagrant ssh
+$ make provision
+```
+
+# Login
+
+```bash
+$ make ssh
 ```
