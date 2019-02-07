@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
     end
 
     devenv.vm.provision "shell", inline: <<-SHELL
-      apt-get update
+      # For first execution of Ansible
+      ln -s /usr/bin/python3 /usr/bin/python
     SHELL
   end
 
