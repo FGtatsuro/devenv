@@ -8,7 +8,7 @@
 	/usr/local/bin/vagrant up devenv
 
 /usr/local/bin/python2:
-	brew isntall python@2
+	brew install python@2
 
 /usr/local/bin/virtualenv: /usr/local/bin/python2
 	/usr/local/bin/pip2 install virtualenv
