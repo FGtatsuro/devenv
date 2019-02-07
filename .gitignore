@@ -1,2 +1,9 @@
 .vagrant
 ubuntu-*-cloudimg-console.log
+
+.venv_devenv/
+
+roles/*
+provision/*.retry
+
+todo

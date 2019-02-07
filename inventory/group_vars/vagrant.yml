@@ -1,0 +1,6 @@
+---
+ansible_connection: ssh
+ansible_user: vagrant
+ansible_host: 127.0.0.1
+docker_group_append_users:
+  - vagrant
