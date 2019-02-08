@@ -10,6 +10,9 @@ Vagrant.configure("2") do |config|
       vb.memory = 2048
     end
 
+    # Ref. http://qiita.com/betahikaru/items/d77f5891f222eba0c4fa0
+    devenv.vm.network "forwarded_port", guest: 22, host: 2223, id: "ssh"
+
     devenv.vm.provision "shell", inline: <<-SHELL
       # For first execution of Ansible
       ln -s /usr/bin/python3 /usr/bin/python
