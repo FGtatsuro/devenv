@@ -3,3 +3,8 @@
   roles:
     - role: FGtatsuro.docker_toolbox
     - role: FGtatsuro.ssh_config
+  tasks:
+    - name: Create a workspace directory
+      file:
+        path: "repos"
+        state: "directory"
