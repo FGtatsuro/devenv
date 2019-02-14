@@ -1,9 +1,9 @@
 ---
-sshconfig_home: '/home/vagrant'
-sshconfig_owner: 'vagrant'
-sshconfig_group: 'vagrant'
+sshconfig_home: /home/vagrant
+sshconfig_owner: vagrant
+sshconfig_group: vagrant
 sshconfig_knownhosts:
-  - 'github.com'
+  - github.com
 sshconfig_publickey_paths:
   - "{{ '~/.ssh/id_rsa.pub' | expanduser }}"
-sshconfig_clientconfig_path: '../../resources/ssh_config'
+sshconfig_clientconfig_path: ../../resources/ssh_config

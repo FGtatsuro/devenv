@@ -6,5 +6,5 @@
   tasks:
     - name: Create a workspace directory
       file:
-        path: "repos"
-        state: "directory"
+        path: repos
+        state: directory
