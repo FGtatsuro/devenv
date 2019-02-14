@@ -2,3 +2,4 @@
 - hosts: devenv
   roles:
     - role: FGtatsuro.docker_toolbox
+    - role: FGtatsuro.ssh_config

@@ -1,2 +1,3 @@
 ---
 - src: FGtatsuro.docker_toolbox
+- src: FGtatsuro.ssh_config
