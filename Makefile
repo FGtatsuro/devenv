@@ -20,10 +20,12 @@
 	.venv_devenv/bin/pip install ansible
 	hash -r
 
-
-.PHONY: dep
-dep: .venv_devenv/bin/ansible
+.dep: .venv_devenv/bin/ansible role_requirements.yml
 	.venv_devenv/bin/ansible-galaxy install -r role_requirements.yml
+	touch .dep
+
+dep: .dep
+
 
 DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
 .PHONY: ssh-add

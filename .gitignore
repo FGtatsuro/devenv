@@ -6,4 +6,6 @@ ubuntu-*-cloudimg-console.log
 roles/*
 provision/*.retry
 
+.dep
+
 todo
