@@ -25,8 +25,13 @@
 dep: .venv_devenv/bin/ansible
 	.venv_devenv/bin/ansible-galaxy install -r role_requirements.yml
 
+DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
+.PHONY: ssh-add
+ssh-add:
+	ssh-add -K $(DEVENV_SSH_PRIVATE_KEY)
+
 .PHONY: provision
-provision: .vagrant/machines/devenv/virtualbox/id dep
+provision: .vagrant/machines/devenv/virtualbox/id dep ssh-add
 	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts
 
 .PHONY: start

@@ -1,0 +1,8 @@
+Host *
+  UseRoaming no
+
+host github.com
+  user git
+  hostname github.com
+  identityfile ~/.ssh/id_rsa.pub
+  identitiesonly yes

@@ -10,6 +10,9 @@ My development environment
 
 - Homebrew
 - Make
+- Key pair for Github access
+   - `~/.ssh/id_rsa`
+   - `~/.ssh/id_rsa.pub`
 
 ## Setup
 
