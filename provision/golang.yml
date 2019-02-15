@@ -1,0 +1,15 @@
+---
+- name: Install Golang
+  apt:
+    name: golang
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  become: yes
+- name: Add Golang settings in .bashrc
+  blockinfile:
+    path: .bashrc
+    block: |
+      export GOPATH=~/gowork
+      export PATH=$GOPATH/bin:$PATH
+    create: yes

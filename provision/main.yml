@@ -8,3 +8,5 @@
       file:
         path: repos
         state: directory
+    - name: Setup Golang environment
+      import_tasks: golang.yml
