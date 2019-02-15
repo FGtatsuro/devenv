@@ -6,9 +6,9 @@
     cache_valid_time: 3600
     install_recommends: no
   become: yes
-- name: Add Golang settings in .bashrc
+- name: Add Golang settings in .bash_profile
   blockinfile:
-    path: .bashrc
+    path: /home/vagrant/.bash_profile
     block: |
       export GOPATH=~/gowork
       export PATH=$GOPATH/bin:$PATH
