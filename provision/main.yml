@@ -10,3 +10,8 @@
         state: directory
     - name: Setup Golang environment
       import_tasks: golang.yml
+    - name: Install hub command
+      command: /bin/bash -lc "go get -v github.com/github/hub"
+      register: result
+      # verbose log of 'go get' is written not in stdout, but in stderr.
+      changed_when: "'(download)' in result.stderr"
