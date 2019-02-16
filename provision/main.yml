@@ -12,3 +12,10 @@
       import_tasks: golang.yml
     - name: Setup Github
       import_tasks: github.yml
+    - name: Install peco
+      apt:
+        name: peco
+        update_cache: yes
+        cache_valid_time: 3600
+        install_recommends: no
+      become: yes
