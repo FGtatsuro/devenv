@@ -1,9 +1,4 @@
 ---
-- name: Install hub command
-  command: /bin/bash -lc "go get -v github.com/github/hub"
-  register: result
-  # verbose log of 'go get' is written not in stdout, but in stderr.
-  changed_when: "'(download)' in result.stderr"
 - name: Set Github owner settings
   git_config:
     name: "{{ item.key }}"
@@ -12,3 +7,9 @@
   with_items:
     - { key: "user.name", value: "FGtatsuro" }
     - { key: "user.email", value: "fujiistorage@gmail.com" }
+
+- name: Install hub command
+  command: /bin/bash -lc "go get -v github.com/github/hub"
+  register: result
+  # verbose log of 'go get' is written not in stdout, but in stderr.
+  changed_when: "'(download)' in result.stderr"
