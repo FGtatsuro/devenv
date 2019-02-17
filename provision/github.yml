@@ -13,3 +13,44 @@
   register: result
   # verbose log of 'go get' is written not in stdout, but in stderr.
   changed_when: "'(download)' in result.stderr"
+
+- name: Install git-secrets
+  block:
+    - name: Ensure directories for git-secrets installation
+      file:
+        path: "{{ item.path }}"
+        state: directory
+        owner: root
+        group: root
+      with_items: "{{ install_info }}"
+      become: yes
+    - name: Install git-secrets binaries
+      get_url:
+        url: "{{ repos_url }}/{{ item.name }}"
+        dest: "{{ item.path }}"
+        owner: root
+        group: root
+      with_items: "{{ install_info }}"
+      become: yes
+    - name: Set executable flag to git-secrets
+      file:
+        path: /usr/local/bin/git-secrets
+        mode: "a+x"
+      become: yes
+    - name: Check git-secrets settings
+      command: "git secrets --list --global"
+      register: result
+      changed_when: no
+      ignore_errors: yes
+    - name: Add git-secrets settings as global git configurations
+      command: "{{ item }}"
+      with_items:
+        - "git secrets --register-aws --global"
+        - "git secrets --install ~/.git-templates/git-secrets"
+        - "git config --global init.templateDir ~/.git-templates/git-secrets"
+      when: "'aws-provider' not in result.stdout"
+  vars:
+    repos_url: https://raw.githubusercontent.com/awslabs/git-secrets/master/
+    install_info:
+      - { name: "git-secrets", path: "/usr/local/bin" }
+      - { name: "git-secrets.1", path: "/usr/local/share/man/man1" }
