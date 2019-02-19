@@ -4,7 +4,8 @@ My development environment
 
 ## Support platform
 
-- OSX
+- OSX (localhost)
+   - Ubuntu (workspace on VM)
 
 ## Requirements
 
