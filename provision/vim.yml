@@ -1,0 +1,65 @@
+---
+# https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
+- name: Add the repository of Neovim
+  apt_repository:
+    repo: "ppa:neovim-ppa/stable"
+    update_cache: yes
+  become: yes
+- name: Install Neovim
+  apt:
+    name: neovim
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  become: yes
+- name: Update symlinks related to vi/vim
+  alternatives:
+    name: "{{ item.name }}"
+    link: "{{ item.link }}"
+    path: /usr/bin/nvim
+    priority: 60
+  with_items:
+    - { name: "vi", link: "/usr/bin/vi" }
+    - { name: "vim", link: "/usr/bin/vim" }
+    - { name: "editor", link: "/usr/bin/editor" }
+  become: yes
+
+- name: Ensure default XDG_CONFIG_HOME exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+- name: Copy Neovim settings
+  copy:
+    src: "../resources/nvim"
+    dest: "{{ ansible_env.HOME }}/.config"
+
+- name: Setup Python3's pip
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  vars:
+    packages:
+      - python3-pip
+      - python3-setuptools
+      - python3-wheel
+  become: yes
+# Workaround for a following issue:
+#   pip version provided by python3-pip is very old.
+#   This results in that changed flag(task of Neovim python client installation) is always True.
+- name: Check Neovim python client installation
+  pip:
+    name: pynvim
+    executable: pip3
+  register: result
+  changed_when: no
+  check_mode: yes
+- debug:
+    var: result
+- name: Install Neovim python client
+  pip:
+    name: pynvim
+    executable: pip3
+  # Workaround: In my environment, result.changed doesn't have a proper boolean value.
+  when: "'pynvim' not in result.stdout"

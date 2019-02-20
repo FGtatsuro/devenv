@@ -12,6 +12,8 @@
       import_tasks: golang.yml
     - name: Setup Github
       import_tasks: github.yml
+    - name: Setup vim
+      import_tasks: vim.yml
     - name: Install peco
       apt:
         name: peco
