@@ -7,7 +7,8 @@ Vagrant.configure("2") do |config|
     devenv.vm.box = "ubuntu/bionic64"
 
     devenv.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
+      vb.name = "devenv"
+      vb.memory = ENV['DEVENV_MEMORY_SIZE'] || 2048
     end
 
     # Ref. http://qiita.com/betahikaru/items/d77f5891f222eba0c4fa0
