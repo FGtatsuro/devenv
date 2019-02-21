@@ -11,6 +11,9 @@ Vagrant.configure("2") do |config|
       vb.memory = ENV['DEVENV_MEMORY_SIZE'] || 2048
     end
 
+    devenv.vm.synced_folder "repos/", "/home/vagrant/repos"
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
     # Ref. http://qiita.com/betahikaru/items/d77f5891f222eba0c4fa0
     devenv.vm.network "forwarded_port", guest: 22, host: 2223, id: "ssh"
 
