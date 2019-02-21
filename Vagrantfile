@@ -21,7 +21,9 @@ Vagrant.configure("2") do |config|
 
     devenv.vm.provision "shell", inline: <<-SHELL
       # For first execution of Ansible
-      ln -s /usr/bin/python3 /usr/bin/python
+      if [ ! -e /usr/bin/python ]; then
+        ln -s /usr/bin/python3 /usr/bin/python
+      fi
     SHELL
   end
 
