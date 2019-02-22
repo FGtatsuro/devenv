@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
       vb.name = "devenv"
       vb.memory = ENV['DEVENV_MEMORY_SIZE'] || 2048
     end
+    devenv.disksize.size = ENV['DEVENV_DISK_SIZE'] || '20GB'
 
     devenv.vm.synced_folder "repos/", "/home/vagrant/repos"
     config.vm.synced_folder ".", "/vagrant", disabled: true

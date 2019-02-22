@@ -1,5 +1,6 @@
 /usr/local/bin/vagrant:
 	brew cask install vagrant
+	vagrant plugin install vagrant-disksize --local
 
 /usr/local/bin/VBoxManage:
 	brew cask install virtualbox
