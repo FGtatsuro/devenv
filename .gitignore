@@ -7,6 +7,6 @@ repos/*
 roles/*
 provision/*.retry
 
-.dep
+.dep_*
 
 todo

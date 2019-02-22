@@ -20,13 +20,15 @@
 	.venv_devenv/bin/pip install ansible
 	hash -r
 
-.dep: /usr/local/bin/vagrant .venv_devenv/bin/ansible \
-	plugin_requirements.txt role_requirements.yml
+.dep_role: .venv_devenv/bin/ansible role_requirements.yml
 	.venv_devenv/bin/ansible-galaxy install -r role_requirements.yml
-	cat plugin_requirements.txt | xargs -I{} vagrant plugin install {} --local
-	touch .dep
+	touch .dep_role
 
-dep: .dep
+.dep_plugin: /usr/local/bin/vagrant plugin_requirements.txt
+	cat plugin_requirements.txt | xargs -I{} vagrant plugin install {} --local
+	touch .dep_plugin
+
+dep: .dep_role .dep_plugin
 
 
 DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
