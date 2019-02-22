@@ -4,9 +4,6 @@
 /usr/local/bin/VBoxManage:
 	brew cask install virtualbox
 
-.vagrant/machines/devenv/virtualbox/id: /usr/local/bin/vagrant /usr/local/bin/VBoxManage
-	/usr/local/bin/vagrant up devenv
-
 /usr/local/bin/python2:
 	brew install python@2
 
@@ -35,6 +32,10 @@ DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
 .PHONY: ssh-add
 ssh-add:
 	ssh-add -K $(DEVENV_SSH_PRIVATE_KEY)
+
+.vagrant/machines/devenv/virtualbox/id: /usr/local/bin/vagrant /usr/local/bin/VBoxManage .dep_plugin
+	/usr/local/bin/vagrant up devenv
+
 
 .PHONY: provision
 provision: .vagrant/machines/devenv/virtualbox/id dep ssh-add
