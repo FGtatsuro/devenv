@@ -1,6 +1,5 @@
 /usr/local/bin/vagrant:
 	brew cask install vagrant
-	vagrant plugin install vagrant-disksize --local
 
 /usr/local/bin/VBoxManage:
 	brew cask install virtualbox
@@ -21,8 +20,10 @@
 	.venv_devenv/bin/pip install ansible
 	hash -r
 
-.dep: .venv_devenv/bin/ansible role_requirements.yml
+.dep: /usr/local/bin/vagrant .venv_devenv/bin/ansible \
+	plugin_requirements.txt role_requirements.yml
 	.venv_devenv/bin/ansible-galaxy install -r role_requirements.yml
+	cat plugin_requirements.txt | xargs -I{} vagrant plugin install {} --local
 	touch .dep
 
 dep: .dep
