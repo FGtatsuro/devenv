@@ -34,6 +34,16 @@ $ VBoxManage showmediuminfo \
 Capacity:       30720 MBytes
 ```
 
+## Start/Stop
+
+```bash
+$ make start
+
+$ make stop
+
+$ make restart
+```
+
 ## Login
 
 ```bash
