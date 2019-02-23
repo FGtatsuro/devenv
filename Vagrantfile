@@ -1,16 +1,29 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require "yaml"
+
+VM_INFO_FILE = ".vm_info.yml"
+
 Vagrant.configure("2") do |config|
 
   config.vm.define "devenv" do |devenv|
     devenv.vm.box = "ubuntu/bionic64"
 
+    if File.exist?(VM_INFO_FILE)
+      vm_info = YAML.load_file(VM_INFO_FILE)
+      memory_size = vm_info["memory_size"]
+      disk_size = vm_info["disk_size"]
+    else
+      memory_size = ENV["DEVENV_MEMORY_SIZE"].to_i || 2048
+      disk_size = ENV["DEVENV_DISK_SIZE"] || "20GB"
+    end
+
     devenv.vm.provider "virtualbox" do |vb|
       vb.name = "devenv"
-      vb.memory = ENV['DEVENV_MEMORY_SIZE'] || 2048
+      vb.memory = memory_size
     end
-    devenv.disksize.size = ENV['DEVENV_DISK_SIZE'] || '20GB'
+    devenv.disksize.size = disk_size
 
     devenv.vm.synced_folder "repos/", "/home/vagrant/repos"
     config.vm.synced_folder ".", "/vagrant", disabled: true
@@ -26,6 +39,15 @@ Vagrant.configure("2") do |config|
         ln -s /usr/bin/python3 /usr/bin/python
       fi
     SHELL
+
+    # Ref. https://www.vagrantup.com/docs/triggers/usage.html
+    devenv.trigger.after :up do |trigger|
+      trigger.ruby do
+        File.open(VM_INFO_FILE, "w") do |f|
+          YAML.dump({"memory_size" => memory_size, "disk_size" => disk_size}, f)
+        end
+      end
+    end
   end
 
 end

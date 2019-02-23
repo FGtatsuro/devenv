@@ -1,6 +1,7 @@
 .vagrant
 ubuntu-*-cloudimg-console.log
 repos/*
+.vm_info.yml
 
 .venv_devenv/
 
