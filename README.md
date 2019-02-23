@@ -34,7 +34,7 @@ $ VBoxManage showmediuminfo \
 Capacity:       30720 MBytes
 ```
 
-# Login
+## Login
 
 ```bash
 $ make ssh
