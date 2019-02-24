@@ -1,5 +1,8 @@
 ---
 - hosts: devenv
+  pre_tasks:
+    - name: Set JP-sepecific settings
+      import_tasks: jp.yml
   roles:
     - role: FGtatsuro.docker_toolbox
     - role: FGtatsuro.ssh_config

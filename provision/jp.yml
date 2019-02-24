@@ -1,0 +1,60 @@
+---
+- block:
+  - name: Install tzdata
+    apt:
+      name: tzdata
+      update_cache: yes
+      cache_valid_time: 3600
+      install_recommends: no
+  - name: set timezone to Asia/Tokyo
+    timezone:
+      name: Asia/Tokyo
+  become: yes
+
+- block:
+  - name: Remove archive.ubuntu.com(dep)
+    apt_repository:
+      repo: "deb http://archive.ubuntu.com/ubuntu {{ item }}"
+      state: absent
+    with_items: "{{ apt_repositories }}"
+  - name: Remove archive.ubuntu.com(dep-src)
+    apt_repository:
+      repo: "deb-src http://archive.ubuntu.com/ubuntu {{ item }}"
+      state: absent
+    with_items: "{{ apt_repositories }}"
+  - name: Remove security.ubuntu.com(dep)
+    apt_repository:
+      repo: "deb http://security.ubuntu.com/ubuntu {{ item }}"
+      state: absent
+    with_items: "{{ apt_security_repositories }}"
+  - name: Remove security.ubuntu.com(dep-src)
+    apt_repository:
+      repo: "deb-src http://security.ubuntu.com/ubuntu {{ item }}"
+      state: absent
+    with_items: "{{ apt_security_repositories }}"
+
+  - name: Add ftp.jaist.ac.jp(dep)
+    apt_repository:
+      repo: "deb http://ftp.jaist.ac.jp/pub/Linux/ubuntu {{ item }}"
+      state: present
+    with_items: "{{ apt_repositories + apt_security_repositories }}"
+  - name: Add ftp.jaist.ac.jp(dep-src)
+    apt_repository:
+      repo: "deb-src http://ftp.jaist.ac.jp/pub/Linux/ubuntu {{ item }}"
+      state: present
+    with_items: "{{ apt_repositories + apt_security_repositories }}"
+
+  vars:
+    apt_repositories:
+      - bionic main restricted
+      - bionic-updates main restricted
+      - bionic universe
+      - bionic-updates universe
+      - bionic multiverse
+      - bionic-updates multiverse
+      - bionic-backports main restricted universe multiverse
+    apt_security_repositories:
+      - bionic-security main restricted
+      - bionic-security universe
+      - bionic-security multiverse
+  become: yes
