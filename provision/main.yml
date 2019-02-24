@@ -24,3 +24,6 @@
         cache_valid_time: 3600
         install_recommends: no
       become: yes
+- hosts: localhost
+  roles:
+    - role: FGtatsuro.tmux
