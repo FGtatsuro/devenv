@@ -42,7 +42,7 @@ provision: .vagrant/machines/devenv/virtualbox/id dep ssh-add
 	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts
 
 .PHONY: start
-start:
+start: ssh-add
 	/usr/local/bin/vagrant up devenv
 
 .PHONY: stop
@@ -50,7 +50,7 @@ stop:
 	/usr/local/bin/vagrant halt devenv
 
 .PHONY: restart
-restart:
+restart: ssh-add
 	/usr/local/bin/vagrant reload devenv
 
 .PHONY: destroy
