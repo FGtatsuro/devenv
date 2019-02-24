@@ -27,3 +27,17 @@
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux
+  tasks:
+    # TODO: Handle this task in tmux role.
+    - name: Copy tmux settings
+      copy:
+        src: "../resources/tmux.conf"
+        dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    - name: Add profile settings to run tmux on terminal startup
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.profile"
+        block: |
+          if [ $SHLVL = 1 ]; then
+            tmux attach || tmux
+          fi
+        create: yes
