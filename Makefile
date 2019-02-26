@@ -37,9 +37,10 @@ ssh-add:
 	/usr/local/bin/vagrant up devenv
 
 
+DEVENV_ANSIBLE_HOST_SUBNET = devenv
 .PHONY: provision
 provision: .vagrant/machines/devenv/virtualbox/id dep ssh-add
-	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts
+	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts -l $(DEVENV_ANSIBLE_HOST_SUBNET)
 
 .PHONY: start
 start: ssh-add
