@@ -12,4 +12,6 @@
     block: |
       export GOPATH=~/gowork
       export PATH=$GOPATH/bin:$PATH
+    marker_begin: "Golang env vars: BEGIN"
+    marker_end: "Golang env vars: END"
     create: yes
