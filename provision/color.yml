@@ -1,0 +1,12 @@
+---
+- name: Set colors related to ls command for readability
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    block: |
+      export LS_COLORS='di=01;04;38;05;75'
+    create: yes
+- name: Change default prompt colors for readability
+  replace:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: "01;34m"
+    replace: "01;38;05;75m"

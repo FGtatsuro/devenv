@@ -11,6 +11,8 @@
       file:
         path: repos
         state: directory
+    - name: Setup color settings
+      import_tasks: color.yml
     - name: Setup Golang environment
       import_tasks: golang.yml
     - name: Setup Github
