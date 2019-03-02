@@ -8,7 +8,7 @@
   become: yes
 - name: Add Golang settings in .bash_profile
   blockinfile:
-    path: "{{ ansible_env.HOME }}/.bash_profile"
+    path: "{{ ansible_env.HOME }}/.profile"
     block: |
       export GOPATH=~/gowork
       export PATH=$GOPATH/bin:$PATH
