@@ -6,7 +6,7 @@
     cache_valid_time: 3600
     install_recommends: no
   become: yes
-- name: Add Golang settings in .bash_profile
+- name: Set environment variables related to Golang
   blockinfile:
     path: "{{ ansible_env.HOME }}/.profile"
     block: |
