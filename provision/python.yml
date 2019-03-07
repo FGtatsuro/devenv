@@ -1,0 +1,13 @@
+---
+- name: Setup Python3 environment
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  vars:
+    packages:
+      - python3-pip
+      - python3-setuptools
+      - python3-wheel
+  become: yes

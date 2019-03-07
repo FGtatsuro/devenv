@@ -11,6 +11,8 @@
       file:
         path: repos
         state: directory
+    - name: Additional setup Python environment
+      import_tasks: python.yml
     - name: Setup color settings
       import_tasks: color.yml
     - name: Setup Golang environment

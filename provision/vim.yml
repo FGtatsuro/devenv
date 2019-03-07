@@ -33,18 +33,6 @@
     src: "../resources/nvim"
     dest: "{{ ansible_env.HOME }}/.config"
 
-- name: Setup Python3's pip
-  apt:
-    name: "{{ packages }}"
-    update_cache: yes
-    cache_valid_time: 3600
-    install_recommends: no
-  vars:
-    packages:
-      - python3-pip
-      - python3-setuptools
-      - python3-wheel
-  become: yes
 # Workaround for a following issue:
 #   pip version provided by python3-pip is very old.
 #   This results in that changed flag(task of Neovim python client installation) is always True.
