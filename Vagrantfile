@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
 
     devenv.vm.synced_folder "repos/", "/home/vagrant/repos"
 
+    devenv.vm.network "private_network", ip: "192.168.33.4"
     # Ref. http://qiita.com/betahikaru/items/d77f5891f222eba0c4fa0
     devenv.vm.network "forwarded_port", guest: 22, host: 2223, id: "ssh"
 
