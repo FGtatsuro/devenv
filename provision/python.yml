@@ -12,3 +12,15 @@
       - python3-wheel
       - python3-venv
   become: yes
+- name: Check whether pip3 exists under user home
+  stat:
+    path: "{{ ansible_env.HOME }}/.local/bin/pip3"
+  register: user_home_pip3
+- name: Use pip3 under user home
+  set_fact:
+    pip3_executable: "{{ ansible_env.HOME }}/.local/bin/pip3"
+  when: user_home_pip3.stat.exists
+- name: Use global pip3
+  set_fact:
+    pip3_executable: "{{ ansible_env.HOME }}/.local/bin/pip3"
+  when: not user_home_pip3.stat.exists
