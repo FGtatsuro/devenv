@@ -39,7 +39,7 @@
 - name: Check Neovim python client installation
   pip:
     name: pynvim
-    executable: pip3
+    executable: "{{ pip3_executable }}"
   register: result
   changed_when: no
   check_mode: yes
@@ -48,6 +48,6 @@
 - name: Install Neovim python client
   pip:
     name: pynvim
-    executable: pip3
+    executable: "{{ pip3_executable }}"
   # Workaround: In my environment, result.changed doesn't have a proper boolean value.
   when: "'pynvim' not in result.stdout"
