@@ -22,5 +22,5 @@
   when: user_home_pip3.stat.exists
 - name: Use global pip3
   set_fact:
-    pip3_executable: "{{ ansible_env.HOME }}/.local/bin/pip3"
+    pip3_executable: /usr/bin/pip3
   when: not user_home_pip3.stat.exists
