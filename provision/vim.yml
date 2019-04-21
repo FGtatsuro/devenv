@@ -32,22 +32,8 @@
   copy:
     src: "../resources/nvim"
     dest: "{{ ansible_env.HOME }}/.config"
-
-# Workaround for a following issue:
-#   pip version provided by python3-pip is very old.
-#   This results in that changed flag(task of Neovim python client installation) is always True.
-- name: Check Neovim python client installation
-  pip:
-    name: pynvim
-    executable: "{{ pip3_executable }}"
-  register: result
-  changed_when: no
-  check_mode: yes
-- debug:
-    var: result
 - name: Install Neovim python client
   pip:
     name: pynvim
     executable: "{{ pip3_executable }}"
-  # Workaround: In my environment, result.changed doesn't have a proper boolean value.
-  when: "'pynvim' not in result.stdout"
+    extra_args: --user
