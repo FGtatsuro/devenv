@@ -24,3 +24,9 @@
   set_fact:
     pip3_executable: /usr/bin/pip3
   when: not user_home_pip3.stat.exists
+- name: Install basic python packages
+  pip:
+    name:
+      - ipython
+    executable: "{{ pip3_executable }}"
+    extra_args: --user
