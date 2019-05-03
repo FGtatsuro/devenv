@@ -16,14 +16,16 @@
   stat:
     path: "{{ ansible_env.HOME }}/.local/bin/pip3"
   register: user_home_pip3
+- name: Install pip3 under user home
+  pip:
+    name:
+      - pip
+    executable: /usr/bin/pip3
+    extra_args: --user
+  when: not user_home_pip3.stat.exists
 - name: Use pip3 under user home
   set_fact:
     pip3_executable: "{{ ansible_env.HOME }}/.local/bin/pip3"
-  when: user_home_pip3.stat.exists
-- name: Use global pip3
-  set_fact:
-    pip3_executable: /usr/bin/pip3
-  when: not user_home_pip3.stat.exists
 - name: Install basic python packages
   pip:
     name:
