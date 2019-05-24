@@ -10,7 +10,7 @@
   blockinfile:
     path: "{{ ansible_env.HOME }}/.profile"
     block: |
-      export GOPATH=~/gowork
+      export GOPATH=~/go
       export PATH=$GOPATH/bin:$PATH
     marker_begin: "Golang env vars: BEGIN"
     marker_end: "Golang env vars: END"
