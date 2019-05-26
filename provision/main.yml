@@ -6,6 +6,7 @@
   roles:
     - role: FGtatsuro.docker_toolbox
     - role: FGtatsuro.ssh_config
+    - role: FGtatsuro.tmux
   tasks:
     - name: Create a workspace directory
       file:
@@ -45,6 +46,16 @@
         packages:
           - bridge-utils
       become: yes
+    - name: Add profile settings to run tmux on terminal startup
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.profile"
+        block: |
+          if [ $SHLVL = 1 ]; then
+            tmux attach || tmux
+          fi
+        marker_begin: "tmux start: BEGIN"
+        marker_end: "tmux start: END"
+        create: yes
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux
