@@ -1,9 +1,3 @@
-/usr/local/bin/vagrant:
-	brew cask install vagrant
-
-/usr/local/bin/VBoxManage:
-	brew cask install virtualbox
-
 /usr/local/bin/python2:
 	brew install python@2
 
@@ -21,43 +15,30 @@
 	.venv_devenv/bin/ansible-galaxy install -r role_requirements.yml
 	touch .dep_role
 
-.dep_plugin: /usr/local/bin/vagrant plugin_requirements.txt
-	cat plugin_requirements.txt | xargs -I{} vagrant plugin install {} --local
-	touch .dep_plugin
-
-dep: .dep_role .dep_plugin
-
 
 DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
 .PHONY: ssh-add
 ssh-add:
 	ssh-add $(DEVENV_SSH_PRIVATE_KEY)
 
-.vagrant/machines/devenv/virtualbox/id: /usr/local/bin/vagrant /usr/local/bin/VBoxManage .dep_plugin
-	/usr/local/bin/vagrant up devenv
-
-
 DEVENV_ANSIBLE_HOST_SUBSET = devenv
 .PHONY: provision
-provision: .vagrant/machines/devenv/virtualbox/id dep ssh-add
+provision: .dep_role ssh-add
 	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts -l $(DEVENV_ANSIBLE_HOST_SUBSET)
 
-.PHONY: start
-start: ssh-add
-	/usr/local/bin/vagrant up devenv
 
-.PHONY: stop
-stop:
-	/usr/local/bin/vagrant halt devenv
+.PHONY: vm/start vm/stop vm/restart vm/destroy vm/ssh
+vm/start: ssh-add
+	make -C bootstrap/vagrant start
 
-.PHONY: restart
-restart: ssh-add
-	/usr/local/bin/vagrant reload devenv
+vm/stop:
+	make -C bootstrap/vagrant stop
 
-.PHONY: destroy
-destroy:
-	/usr/local/bin/vagrant destroy -f devenv
+vm/restart:
+	make -C bootstrap/vagrant restart
 
-.PHONY: ssh
-ssh:
-	/usr/local/bin/vagrant ssh devenv
+vm/destroy:
+	make -C bootstrap/vagrant destroy
+
+vm/ssh:
+	make -C bootstrap/vagrant ssh
