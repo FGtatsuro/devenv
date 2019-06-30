@@ -8,11 +8,9 @@
 	cat plugin_requirements.txt | xargs -I{} vagrant plugin install {} --local
 	touch .dep_plugin
 
-.vagrant/machines/devenv/virtualbox/id: /usr/local/bin/vagrant /usr/local/bin/VBoxManage .dep_plugin
-	/usr/local/bin/vagrant up devenv
 
 .PHONY: start
-start: .vagrant/machines/devenv/virtualbox/id
+start: /usr/local/bin/vagrant /usr/local/bin/VBoxManage .dep_plugin
 	/usr/local/bin/vagrant up devenv
 
 .PHONY: stop
