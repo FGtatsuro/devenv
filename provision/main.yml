@@ -65,6 +65,16 @@
         marker_begin: "tmux start: BEGIN"
         marker_end: "tmux start: END"
         create: yes
+    - name: Set HISTSIZE
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        regexp: "^HISTSIZE="
+        line: "HISTSIZE=100000"
+    - name: Remove HISTFILESIZE
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        regexp: "^HISTFILESIZE="
+        state: absent
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux
@@ -83,6 +93,16 @@
           fi
           cd ~/devenv
         create: yes
+        marker_begin: "tmux settings: BEGIN"
+        marker_end: "tmux settings: END"
+    - name: Add profile settings for bash
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.bash_profile"
+        block: |
+          HISTSIZE=100000
+        create: yes
+        marker_begin: "bash settings: BEGIN"
+        marker_end: "bash settings: END"
     - name: Install Google Cloud SDK
       homebrew_cask:
         name: google-cloud-sdk
