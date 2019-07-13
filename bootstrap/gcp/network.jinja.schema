@@ -1,0 +1,5 @@
+info:
+  title: devenv network
+  author: Tatsuro Fujii
+  description: Create a network for devenv
+  version: 1.0

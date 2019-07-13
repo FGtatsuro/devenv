@@ -1,0 +1,12 @@
+info:
+  title: devenv firewall rules
+  author: Tatsuro Fujii
+  description: Create firewall rules for devenv
+
+required:
+  - network
+
+properties:
+  network:
+    type: string
+    description: network name for devenv

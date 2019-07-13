@@ -1,0 +1,18 @@
+info:
+  title: devenv subnetwork
+  author: Tatsuro Fujii
+  description: Create a subnetwork for devenv
+  version: 1.0
+
+required:
+  - network
+
+properties:
+  region:
+    type: string
+    description: region for devenv
+    default: us-west1
+
+  network:
+    type: string
+    description: network name for devenv
