@@ -1,0 +1,11 @@
+info:
+  title: devenv top config
+  author: Tatsuro Fujii
+  description: Create devenv
+
+# FYI: https://stackoverflow.com/questions/36135760/google-deploy-manager-invalid-config-files-template-fetching-failed-failed-t
+imports:
+- path: instance.jinja
+- path: network.jinja
+- path: subnetwork.jinja
+- path: firewall.jinja

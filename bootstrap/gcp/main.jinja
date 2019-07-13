@@ -1,12 +1,6 @@
 {% set NETWORK_NAME = "devenv-network" %}
 {% set REGION = "us-west1" %}
 
-imports:
-- path: instance.jinja
-- path: network.jinja
-- path: subnetwork.jinja
-- path: firewall.jinja
-
 resources:
 - name: devenv
   type: instance.jinja
