@@ -1,0 +1,7 @@
+resources:
+- name: {{ env["name"] }}
+  type: compute.v1.subnetwork
+  properties:
+    network: $(ref.{{ properties["network"] }}.selfLink)
+    region: {{ properties["region"] }}
+    ipCidrRange: 10.0.0.0/16

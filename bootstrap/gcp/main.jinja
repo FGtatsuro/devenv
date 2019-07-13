@@ -1,0 +1,28 @@
+{% set NETWORK_NAME = "devenv-network" %}
+{% set REGION = "us-west1" %}
+
+imports:
+- path: instance.jinja
+- path: network.jinja
+- path: subnetwork.jinja
+- path: firewall.jinja
+
+resources:
+- name: devenv
+  type: instance.jinja
+  properties:
+    zone: {{ REGION }}-a
+    machineType: f1-micro
+    network: {{ NETWORK_NAME }}
+    subnetwork: {{ NETWORK_NAME }}-sub
+- name: {{ NETWORK_NAME }}
+  type: network.jinja
+- name: {{ NETWORK_NAME }}-sub
+  type: subnetwork.jinja
+  properties:
+    network: {{ NETWORK_NAME }}
+    region: {{ REGION }}
+- name: {{ NETWORK_NAME }}-firewall
+  type: firewall.jinja
+  properties:
+    network: {{ NETWORK_NAME }}

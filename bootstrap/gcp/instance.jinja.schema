@@ -1,0 +1,28 @@
+info:
+  title: devenv Compute Engine instance
+  author: Tatsuro Fujii
+  description: Create a Compute Engine instance for devenv
+  version: 1.0
+
+required:
+  - network
+  - subnetwork
+
+properties:
+  zone:
+    type: string
+    description: zone for devenv
+    default: us-west1-a
+
+  machineType:
+    type: string
+    description: machine type for devenv
+    default: f1-micro
+
+  network:
+    type: string
+    description: network name for devenv
+
+  subnetwork:
+    type: string
+    description: subnetwork name for devenv
