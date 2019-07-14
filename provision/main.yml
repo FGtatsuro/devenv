@@ -3,6 +3,10 @@
   pre_tasks:
     - name: Set JP-sepecific settings
       import_tasks: jp.yml
+      # FYI
+      #   - https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#special-variables
+      #   - https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-complex-variable-data
+      when: "'jp' in group_names"
   roles:
     - role: FGtatsuro.ssh_config
   tasks:
