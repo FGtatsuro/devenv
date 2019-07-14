@@ -1,0 +1,22 @@
+---
+- name: Setup tmux
+  import_tasks: tmux.yml
+- name: Setup color settings
+  import_tasks: color.yml
+- name: Set HISTSIZE
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: "^HISTSIZE="
+    line: "HISTSIZE=100000"
+- name: Remove HISTFILESIZE
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: "^HISTFILESIZE="
+    state: absent
+- name: Install peco
+  apt:
+    name: peco
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  become: yes

@@ -13,25 +13,16 @@
         state: directory
     - name: Additional setup Python environment
       import_tasks: python.yml
-    - name: Setup color settings
-      import_tasks: color.yml
     - name: Setup Golang environment
       import_tasks: golang.yml
     - name: Setup Github
       import_tasks: github.yml
     - name: Setup vim
       import_tasks: vim.yml
-    - name: Setup tmux
-      import_tasks: tmux.yml
     - name: Setup DB
       import_tasks: db.yml
-    - name: Install peco
-      apt:
-        name: peco
-        update_cache: yes
-        cache_valid_time: 3600
-        install_recommends: no
-      become: yes
+    - name: Setup settings related to terminal
+      import_tasks: terminal.yml
     - name: Install network tools
       apt:
         name: "{{ packages }}"
@@ -42,16 +33,6 @@
         packages:
           - bridge-utils
       become: yes
-    - name: Set HISTSIZE
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        regexp: "^HISTSIZE="
-        line: "HISTSIZE=100000"
-    - name: Remove HISTFILESIZE
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        regexp: "^HISTFILESIZE="
-        state: absent
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux
