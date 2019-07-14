@@ -17,6 +17,7 @@
     - name: Install Docker
       import_role:
         name: FGtatsuro.docker_toolbox
+      when: "'docker_host' in group_names"
     - name: Additional setup Python environment
       import_tasks: python.yml
     - name: Setup Golang environment
