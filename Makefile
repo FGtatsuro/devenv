@@ -24,7 +24,7 @@ ssh-add:
 DEVENV_ANSIBLE_HOST_SUBSET = devenv_vm
 .PHONY: provision
 provision: .dep_role ssh-add
-	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts -l $(DEVENV_ANSIBLE_HOST_SUBSET)
+	ANSIBLE_CONFIG=$(DEVENV_ANSIBLE_CONFIG) .venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts -l $(DEVENV_ANSIBLE_HOST_SUBSET)
 
 
 .PHONY: vm/start vm/stop vm/restart vm/destroy vm/ssh

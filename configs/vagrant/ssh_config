@@ -1,0 +1,15 @@
+# Based on output of `vagrant ssh-config devenv`
+Host devenv_vm
+  HostName 127.0.0.1
+  User vagrant
+  Port 2223
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  # NOTE:
+  #   Relative path from this file to private key mann't work well
+  #   In that case, this path must be passed via command line option like `-o IdentityFile=<absolute path>`
+  IdentityFile ../../bootstrap/vagrant/.vagrant/machines/devenv/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+  ForwardAgent yes
