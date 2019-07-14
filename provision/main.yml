@@ -23,16 +23,11 @@
       import_tasks: vim.yml
     - name: Setup tmux
       import_tasks: tmux.yml
+    - name: Setup DB
+      import_tasks: db.yml
     - name: Install peco
       apt:
         name: peco
-        update_cache: yes
-        cache_valid_time: 3600
-        install_recommends: no
-      become: yes
-    - name: Install SQLite3 CLI
-      apt:
-        name: sqlite3
         update_cache: yes
         cache_valid_time: 3600
         install_recommends: no
