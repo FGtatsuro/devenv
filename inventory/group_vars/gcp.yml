@@ -1,0 +1,10 @@
+---
+# TODO: dynamic inventory
+ansible_connection: ssh
+ansible_user: fujiistorage_gmail_com
+sshconfig_home: /home/fujiistorage_gmail_com
+sshconfig_owner: fujiistorage_gmail_com
+# NOTE: https://cloud.google.com/compute/docs/instances/managing-instance-access#login_messages
+# This value can be changed. Thus, I must check result of following command on GCP instance.
+#   $ groups fujiistorage_gmail_com
+sshconfig_group: 312247464
