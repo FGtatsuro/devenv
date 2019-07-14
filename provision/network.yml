@@ -1,0 +1,11 @@
+---
+- name: Install network tools
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  vars:
+    packages:
+      - bridge-utils
+  become: yes
