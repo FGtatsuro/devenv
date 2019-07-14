@@ -1,0 +1,23 @@
+---
+- name: Install tmux
+  import_role:
+    name: FGtatsuro.tmux
+- name: Add profile settings to run tmux on terminal startup
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    block: |
+      # https://qiita.com/sonots/items/2d7950a68da0a02ba7e4
+      SSH_AUTH_SOCK_FOR_TMUX=$HOME/.ssh/agent_socket
+      if [ $SHLVL = 1 ]; then
+        if [ -S "$SSH_AUTH_SOCK" ]; then
+          ln -sf $SSH_AUTH_SOCK $SSH_AUTH_SOCK_FOR_TMUX
+        fi
+        tmux attach || tmux
+      else
+        if [ -S "$SSH_AUTH_SOCK_FOR_TMUX" ]; then
+          export SSH_AUTH_SOCK=$SSH_AUTH_SOCK_FOR_TMUX
+        fi
+      fi
+    marker_begin: "tmux start: BEGIN"
+    marker_end: "tmux start: END"
+    create: yes

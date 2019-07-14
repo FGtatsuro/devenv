@@ -3,78 +3,35 @@
   pre_tasks:
     - name: Set JP-sepecific settings
       import_tasks: jp.yml
+      # FYI
+      #   - https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#special-variables
+      #   - https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-complex-variable-data
+      when: "'jp' in group_names"
   roles:
-    - role: FGtatsuro.docker_toolbox
     - role: FGtatsuro.ssh_config
-    - role: FGtatsuro.tmux
   tasks:
     - name: Create a workspace directory
       file:
         path: repos
         state: directory
+    - name: Install Docker
+      import_role:
+        name: FGtatsuro.docker_toolbox
+      when: "'docker_host' in group_names"
     - name: Additional setup Python environment
       import_tasks: python.yml
-    - name: Setup color settings
-      import_tasks: color.yml
     - name: Setup Golang environment
       import_tasks: golang.yml
     - name: Setup Github
       import_tasks: github.yml
     - name: Setup vim
       import_tasks: vim.yml
-    - name: Install peco
-      apt:
-        name: peco
-        update_cache: yes
-        cache_valid_time: 3600
-        install_recommends: no
-      become: yes
-    - name: Install SQLite3 CLI
-      apt:
-        name: sqlite3
-        update_cache: yes
-        cache_valid_time: 3600
-        install_recommends: no
-      become: yes
-    - name: Install network tools
-      apt:
-        name: "{{ packages }}"
-        update_cache: yes
-        cache_valid_time: 3600
-        install_recommends: no
-      vars:
-        packages:
-          - bridge-utils
-      become: yes
-    - name: Add profile settings to run tmux on terminal startup
-      blockinfile:
-        path: "{{ ansible_env.HOME }}/.profile"
-        block: |
-          # https://qiita.com/sonots/items/2d7950a68da0a02ba7e4
-          SSH_AUTH_SOCK_FOR_TMUX=$HOME/.ssh/agent_socket
-          if [ $SHLVL = 1 ]; then
-            if [ -S "$SSH_AUTH_SOCK" ]; then
-              ln -sf $SSH_AUTH_SOCK $SSH_AUTH_SOCK_FOR_TMUX
-            fi
-            tmux attach || tmux
-          else
-            if [ -S "$SSH_AUTH_SOCK_FOR_TMUX" ]; then
-              export SSH_AUTH_SOCK=$SSH_AUTH_SOCK_FOR_TMUX
-            fi
-          fi
-        marker_begin: "tmux start: BEGIN"
-        marker_end: "tmux start: END"
-        create: yes
-    - name: Set HISTSIZE
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        regexp: "^HISTSIZE="
-        line: "HISTSIZE=100000"
-    - name: Remove HISTFILESIZE
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        regexp: "^HISTFILESIZE="
-        state: absent
+    - name: Setup DB
+      import_tasks: db.yml
+    - name: Setup settings related to terminal
+      import_tasks: terminal.yml
+    - name: Setup settings related to network
+      import_tasks: network.yml
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux

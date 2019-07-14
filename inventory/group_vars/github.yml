@@ -1,7 +1,4 @@
 ---
-sshconfig_home: /home/vagrant
-sshconfig_owner: vagrant
-sshconfig_group: vagrant
 sshconfig_knownhosts:
   - github.com
 sshconfig_publickey_paths:

@@ -1,7 +1,16 @@
 localhost ansible_connection=local
 
+[devenv]
+devenv_vm
+
 [vagrant]
-devenv	ansible_port=2223 ansible_ssh_private_key_file=bootstrap/vagrant/.vagrant/machines/devenv/virtualbox/private_key
+devenv_vm	ansible_port=2223 ansible_ssh_private_key_file=bootstrap/vagrant/.vagrant/machines/devenv/virtualbox/private_key
 
 [github]
-devenv
+devenv_vm
+
+[jp]
+devenv_vm
+
+[docker_host]
+devenv_vm

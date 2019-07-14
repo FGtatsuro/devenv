@@ -4,3 +4,6 @@ ansible_user: vagrant
 ansible_host: 127.0.0.1
 docker_group_append_users:
   - vagrant
+sshconfig_home: /home/vagrant
+sshconfig_owner: vagrant
+sshconfig_group: vagrant
