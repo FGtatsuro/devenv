@@ -4,13 +4,15 @@
     - name: Set JP-sepecific settings
       import_tasks: jp.yml
   roles:
-    - role: FGtatsuro.docker_toolbox
     - role: FGtatsuro.ssh_config
   tasks:
     - name: Create a workspace directory
       file:
         path: repos
         state: directory
+    - name: Install Docker
+      import_role:
+        name: FGtatsuro.docker_toolbox
     - name: Additional setup Python environment
       import_tasks: python.yml
     - name: Setup Golang environment
