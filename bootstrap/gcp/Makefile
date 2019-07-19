@@ -26,4 +26,4 @@ destroy: /usr/local/bin/gcloud
 	fi
 
 ssh: /usr/local/bin/gcloud
-	/usr/local/bin/gcloud compute ssh devenv
+	/usr/local/bin/gcloud compute ssh devenv --ssh-flag='-A'
