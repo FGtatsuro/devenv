@@ -21,7 +21,7 @@ DEVENV_SSH_PRIVATE_KEY = ~/.ssh/id_rsa
 ssh-add:
 	ssh-add $(DEVENV_SSH_PRIVATE_KEY)
 
-DEVENV_ANSIBLE_HOST_SUBSET = devenv_vm
+DEVENV_ANSIBLE_HOST_SUBSET = devenv_gcp
 .PHONY: provision
 provision: .dep_role ssh-add
 	.venv_devenv/bin/ansible-playbook provision/main.yml -i inventory/hosts -l $(DEVENV_ANSIBLE_HOST_SUBSET)

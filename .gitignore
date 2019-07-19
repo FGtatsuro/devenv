@@ -7,6 +7,7 @@ repos/*
 
 roles/*
 provision/*.retry
+inventory/host_vars/*
 
 .dep_*
 
