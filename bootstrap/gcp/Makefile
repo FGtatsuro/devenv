@@ -10,6 +10,9 @@ create: /usr/local/bin/gcloud
 		--template main.jinja \
 		--automatic-rollback-on-error; \
 	fi
+	PUBLIC_IP=`gcloud compute instances describe devenv --format=json | \
+		  python -c "import json, sys; print(json.loads(sys.stdin.read())['networkInterfaces'][0]['accessConfigs'][0]['natIP'])"`; \
+		  echo "Public IP: $$PUBLIC_IP";
 
 start: /usr/local/bin/gcloud
 	/usr/local/bin/gcloud compute instances start devenv
