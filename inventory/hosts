@@ -10,8 +10,8 @@ devenv_vm	ansible_port=2223 ansible_ssh_private_key_file=bootstrap/vagrant/.vagr
 [gcp]
 devenv_gcp	ansible_ssh_private_key_file=~/.ssh/google_compute_engine
 
-[github]
-devenv_vm
+[github:children]
+devenv
 
 [jp]
 devenv_vm
