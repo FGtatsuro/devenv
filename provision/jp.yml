@@ -1,17 +1,5 @@
 ---
 - block:
-  - name: Install tzdata
-    apt:
-      name: tzdata
-      update_cache: yes
-      cache_valid_time: 3600
-      install_recommends: no
-  - name: set timezone to Asia/Tokyo
-    timezone:
-      name: Asia/Tokyo
-  become: yes
-
-- block:
   - name: Remove archive.ubuntu.com(dep)
     apt_repository:
       repo: "deb http://archive.ubuntu.com/ubuntu {{ item }}"
