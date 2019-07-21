@@ -1,6 +1,8 @@
 ---
 - hosts: devenv
   pre_tasks:
+    - name: Setup timezone
+      import_tasks: timezone.yml
     - name: Set JP-sepecific settings
       import_tasks: jp.yml
       # FYI
