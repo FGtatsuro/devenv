@@ -1,0 +1,11 @@
+---
+- hosts: gcp
+  tasks:
+    - name: Install k8s related packages
+      snap:
+        name: "{{ packages }}"
+        classic: yes
+      vars:
+        packages:
+          - kubectl
+      become: yes

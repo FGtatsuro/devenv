@@ -71,3 +71,5 @@
       homebrew:
         name: jq
         update_homebrew: yes
+- name: GCP specified play
+  import_playbook: gcp.yml
