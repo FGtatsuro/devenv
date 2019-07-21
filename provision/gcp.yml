@@ -16,3 +16,14 @@
       register: result
       # verbose log of 'go get' is written not in stdout, but in stderr.
       changed_when: "'(download)' in result.stderr"
+    - name: Add completion settings of GCP CLI
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.profile"
+        block: |
+          # The next line updates PATH for the Google Cloud SDK.
+          . /snap/google-cloud-sdk/current/path.bash.inc
+          # The next line enables shell command completion for gcloud.
+          . /snap/google-cloud-sdk/current/completion.bash.inc
+        marker_begin: "gcloud settings: BEGIN"
+        marker_end: "gcloud settings: END"
+        create: yes
