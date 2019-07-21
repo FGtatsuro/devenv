@@ -1,0 +1,18 @@
+---
+- hosts: gcp
+  tasks:
+    - name: Install k8s related packages
+      snap:
+        name: "{{ packages }}"
+        classic: yes
+      vars:
+        packages:
+          - kubectl
+      become: yes
+    # This task may be failed if MachineType if f1-micro.
+    # In that case, please change MachineType to g1-small.
+    - name: Install kustomize
+      command: /bin/bash -lc "go get -v sigs.k8s.io/kustomize/cmd/kustomize"
+      register: result
+      # verbose log of 'go get' is written not in stdout, but in stderr.
+      changed_when: "'(download)' in result.stderr"
