@@ -1,6 +1,4 @@
 ---
 sshconfig_knownhosts:
   - github.com
-sshconfig_publickey_paths:
-  - "{{ '~/.ssh/id_rsa.pub' | expanduser }}"
 sshconfig_clientconfig_path: ../../resources/ssh_config
