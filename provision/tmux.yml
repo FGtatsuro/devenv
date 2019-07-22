@@ -6,18 +6,26 @@
   blockinfile:
     path: "{{ ansible_env.HOME }}/.profile"
     block: |
-      # https://qiita.com/sonots/items/2d7950a68da0a02ba7e4
-      SSH_AUTH_SOCK_FOR_TMUX=$HOME/.ssh/agent_socket
       if [ $SHLVL = 1 ]; then
-        if [ -S "$SSH_AUTH_SOCK" ]; then
-          ln -sf $SSH_AUTH_SOCK $SSH_AUTH_SOCK_FOR_TMUX
-        fi
         tmux attach || tmux
-      else
-        if [ -S "$SSH_AUTH_SOCK_FOR_TMUX" ]; then
-          export SSH_AUTH_SOCK=$SSH_AUTH_SOCK_FOR_TMUX
-        fi
       fi
     marker_begin: "tmux start: BEGIN"
     marker_end: "tmux start: END"
+    create: yes
+- name: Add rc settings to trace ssh agent socket
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      # https://qiita.com/sonots/items/2d7950a68da0a02ba7e4
+      SSH_AUTH_SOCK_FOR_TMUX=$HOME/.ssh/agent_socket
+      if [ -S "$SSH_AUTH_SOCK" ]; then
+        case $SSH_AUTH_SOCK in
+          /tmp/*/agent.[0-9]*)
+            ln -sf $SSH_AUTH_SOCK $SSH_AUTH_SOCK_FOR_TMUX && export SSH_AUTH_SOCK=$SSH_AUTH_SOCK_FOR_TMUX
+        esac
+      elif [ -S "$SSH_AUTH_SOCK_FOR_TMUX" ]; then
+        export SSH_AUTH_SOCK=$SSH_AUTH_SOCK_FOR_TMUX
+      fi
+    marker_begin: "tmux ssh agent socket: BEGIN"
+    marker_end: "tmux ssh agent socket: END"
     create: yes
