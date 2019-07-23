@@ -59,5 +59,5 @@ gcp/restart:
 gcp/destroy:
 	make -C bootstrap/gcp destroy
 
-gcp/ssh:
+gcp/ssh: ssh-add
 	make -C bootstrap/gcp ssh
