@@ -16,6 +16,45 @@ My development environment
    - `~/.ssh/id_rsa`
    - `~/.ssh/id_rsa.pub`
 
+## GCP
+
+### Bootstrap
+
+```bash
+$ make gcp/create
+...
+Public IP: <external IP of GCP compute engine instance>
+
+# ATTENTION: inventory/host_vars/devenv_gcp.yml MUST NOT be committed.
+$ vi inventory/host_vars/devenv_gcp.yml
+...
+---
+# TODO: Use static IP
+ansible_host: <external IP of GCP compute engine instance>
+```
+
+### Provision
+
+```bash
+$ make provision
+```
+
+### Start/Stop
+
+```bash
+$ make gcp/start
+
+$ make gcp/stop
+
+$ make gcp/restart
+```
+
+### Login
+
+```bash
+$ make gcp/ssh
+```
+
 ## VM
 
 ### Setup
