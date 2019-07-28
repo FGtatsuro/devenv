@@ -69,6 +69,14 @@
         # TODO: After that, execute:
         #   $ /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/install.sh
         #   $ gcloud init
+    - name: Install additional components of Google Cloud SDK
+      command: gcloud components install {{ components | join(' ') }}  --quiet
+      vars:
+        components:
+          - alpha
+          - beta
+      register: install_additional_gcloud
+      changed_when: "'up to date' not in install_additional_gcloud.stderr"
     - name: Install jq
       homebrew:
         name: jq
