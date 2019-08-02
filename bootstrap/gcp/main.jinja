@@ -20,3 +20,8 @@ resources:
   type: firewall.jinja
   properties:
     network: {{ NETWORK_NAME }}
+- name: devenv-sa
+  type: serviceaccount.jinja
+  properties:
+    roles:
+    - roles/editor
