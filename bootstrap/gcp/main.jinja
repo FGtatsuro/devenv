@@ -1,4 +1,5 @@
 {% set NETWORK_NAME = "devenv-network" %}
+{% set SERVICE_ACCOUNT = "devenv-sa" %}
 {% set REGION = "us-west1" %}
 
 resources:
@@ -9,6 +10,7 @@ resources:
     machineType: f1-micro
     network: {{ NETWORK_NAME }}
     subnetwork: {{ NETWORK_NAME }}-sub
+    serviceAccount: {{ SERVICE_ACCOUNT }}
 - name: {{ NETWORK_NAME }}
   type: network.jinja
 - name: {{ NETWORK_NAME }}-sub
@@ -20,3 +22,9 @@ resources:
   type: firewall.jinja
   properties:
     network: {{ NETWORK_NAME }}
+- name: {{ SERVICE_ACCOUNT }}
+  type: serviceaccount.jinja
+  properties:
+    roles:
+    - roles/container.admin
+    - roles/deploymentmanager.editor

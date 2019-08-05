@@ -36,6 +36,10 @@ resources:
       accessConfigs:
       - name: External NAT
         type: ONE_TO_ONE_NAT
+    serviceAccounts:
+    - email: $(ref.{{ properties["serviceAccount"] }}.email)
+      scopes:
+      - https://www.googleapis.com/auth/cloud-platform
     metadata:
       items:
       - key: startup-script
