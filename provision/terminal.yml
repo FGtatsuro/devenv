@@ -13,10 +13,14 @@
     path: "{{ ansible_env.HOME }}/.bashrc"
     regexp: "^HISTFILESIZE="
     state: absent
-- name: Install peco
+- name: Install command line utilities
   apt:
-    name: peco
+    name: "{{ packages }}"
     update_cache: yes
     cache_valid_time: 3600
     install_recommends: no
+  vars:
+    packages:
+      - peco
+      - xsel
   become: yes

@@ -77,9 +77,13 @@
           - beta
       register: install_additional_gcloud
       changed_when: "'up to date' not in install_additional_gcloud.stderr"
-    - name: Install jq
+    - name: Install command line utilities
       homebrew:
-        name: jq
+        name: "{{ packages }}"
         update_homebrew: yes
+      vars:
+        packages:
+          - jq
+          - socat
 - name: GCP specified play
   import_playbook: gcp.yml
