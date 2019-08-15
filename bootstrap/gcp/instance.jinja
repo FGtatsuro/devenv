@@ -35,7 +35,9 @@ resources:
       # Access Config required to give the instance a public IP address
       accessConfigs:
       - name: External NAT
+        natIP: $(ref.{{ properties["externalIP"] }}.address)
         type: ONE_TO_ONE_NAT
+    canIpForward: true
     serviceAccounts:
     - email: $(ref.{{ properties["serviceAccount"] }}.email)
       scopes:

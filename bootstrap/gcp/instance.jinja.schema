@@ -7,6 +7,7 @@ info:
 required:
   - network
   - subnetwork
+  - externalIP
 
 properties:
   zone:
@@ -26,3 +27,7 @@ properties:
   subnetwork:
     type: string
     description: subnetwork name for devenv
+
+  externalIP:
+    type: string
+    description: externalIP name for devenv

@@ -29,7 +29,6 @@ Public IP: <external IP of GCP compute engine instance>
 $ vi inventory/host_vars/devenv_gcp.yml
 ...
 ---
-# TODO: Use static IP
 ansible_host: <external IP of GCP compute engine instance>
 ```
 

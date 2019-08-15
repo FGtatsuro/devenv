@@ -9,4 +9,5 @@ imports:
 - path: network.jinja
 - path: subnetwork.jinja
 - path: firewall.jinja
+- path: externalip.jinja
 - path: serviceaccount.jinja
