@@ -7,3 +7,21 @@ resources:
     allowed:
     - IPProtocol: TCP
       ports: ["22"]
+- name: {{ env["name"] }}-vpn-ingress
+  type: compute.v1.firewall
+  properties:
+    network: $(ref.{{ properties["network"] }}.selfLink)
+    sourceRanges: ["0.0.0.0/0"]
+    direction: INGRESS
+    allowed:
+    - IPProtocol: UDP
+      ports: ["1194"]
+- name: {{ env["name"] }}-vpn-egress
+  type: compute.v1.firewall
+  properties:
+    network: $(ref.{{ properties["network"] }}.selfLink)
+    destinationRanges: ["0.0.0.0/0"]
+    direction: EGRESS
+    allowed:
+    - IPProtocol: UDP
+      ports: ["1194"]
