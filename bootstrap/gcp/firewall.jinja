@@ -25,3 +25,13 @@ resources:
     allowed:
     - IPProtocol: UDP
       ports: ["1194"]
+- name: {{ env["name"] }}-https
+  type: compute.v1.firewall
+  properties:
+    network: $(ref.{{ properties["network"] }}.selfLink)
+    sourceRanges: ["0.0.0.0/0"]
+    targetTags:
+    - https-server
+    allowed:
+    - IPProtocol: TCP
+      ports: ["443"]

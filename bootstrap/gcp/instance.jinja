@@ -38,6 +38,9 @@ resources:
         natIP: $(ref.{{ properties["externalIP"] }}.address)
         type: ONE_TO_ONE_NAT
     canIpForward: true
+    tags:
+      items:
+      - https-server
     serviceAccounts:
     - email: $(ref.{{ properties["serviceAccount"] }}.email)
       scopes:
