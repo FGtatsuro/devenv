@@ -12,3 +12,4 @@ inventory/host_vars/*
 .dep_*
 
 todo
+client.ovpn

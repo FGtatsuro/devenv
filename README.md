@@ -61,6 +61,13 @@ $ make gcp/preview
 $ make gcp/update
 ```
 
+### Use VPN connection
+
+```bash
+$ gcloud compute scp fujiistorage_gmail_com@devenv:~/client.ovpn .
+$ open client.ovpn
+```
+
 ## VM
 
 ### Setup

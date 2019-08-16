@@ -1,0 +1,23 @@
+---
+- name: Check whether OpenVPN is installed
+  command: "which openvpn"
+  register: result
+  changed_when: no
+  ignore_errors: yes
+- name: Setup OpenVPN
+  block:
+    - name: Get OpenVPN install script
+      get_url:
+        url: https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+        dest: /tmp/openvpn-install.sh
+        mode: a+x
+    - name: Run OpenVPN install script
+      shell: "AUTO_INSTALL=y /tmp/openvpn-install.sh"
+      args:
+        executable: /bin/bash
+    - name: Remove OpenVPN install script
+      file:
+        path: /tmp/openvpn-install.sh
+        state: absent
+  when: result.rc != 0
+  become: yes
