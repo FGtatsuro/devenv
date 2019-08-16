@@ -55,6 +55,13 @@ $ make gcp/restart
 $ make gcp/ssh
 ```
 
+### Update GCP resources
+
+```bash
+$ make gcp/preview
+$ make gcp/update
+```
+
 ## VM
 
 ### Setup
