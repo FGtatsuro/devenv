@@ -47,6 +47,12 @@ vm/ssh:
 gcp/create:
 	make -C bootstrap/gcp create
 
+gcp/preview:
+	make -C bootstrap/gcp preview
+
+gcp/update:
+	make -C bootstrap/gcp update
+
 gcp/start:
 	make -C bootstrap/gcp start
 

@@ -27,6 +27,20 @@ create: /usr/local/bin/gcloud api_service_account
 		  python -c "import json, sys; print(json.loads(sys.stdin.read())['networkInterfaces'][0]['accessConfigs'][0]['natIP'])"`; \
 		  echo "Public IP: $$PUBLIC_IP";
 
+preview: /usr/local/bin/gcloud
+	rc=`/usr/local/bin/gcloud deployment-manager deployments describe devenv > /dev/null 2>&1; echo $$?`; \
+	if [ $$rc -eq 0 ]; then \
+		/usr/local/bin/gcloud deployment-manager deployments update devenv \
+		--template main.jinja \
+		--preview; \
+	fi
+
+update: /usr/local/bin/gcloud
+	rc=`/usr/local/bin/gcloud deployment-manager deployments describe devenv > /dev/null 2>&1; echo $$?`; \
+	if [ $$rc -eq 0 ]; then \
+		/usr/local/bin/gcloud deployment-manager deployments update devenv; \
+	fi
+
 start: /usr/local/bin/gcloud
 	/usr/local/bin/gcloud compute instances start devenv
 
