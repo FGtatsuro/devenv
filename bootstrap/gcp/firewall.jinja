@@ -4,6 +4,7 @@ resources:
   properties:
     network: $(ref.{{ properties["network"] }}.selfLink)
     sourceRanges: ["0.0.0.0/0"]
+    priority: 65534
     allowed:
     - IPProtocol: TCP
       ports: ["22"]
