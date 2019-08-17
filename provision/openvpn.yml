@@ -1,9 +1,8 @@
 ---
 - name: Check whether OpenVPN is installed
-  command: "which openvpn"
+  stat:
+    path: /usr/sbin/openvpn
   register: result
-  changed_when: no
-  ignore_errors: yes
 - name: Setup OpenVPN
   block:
     - name: Get OpenVPN install script
@@ -19,5 +18,5 @@
       file:
         path: /tmp/openvpn-install.sh
         state: absent
-  when: result.rc != 0
+  when: not result.stat.exists
   become: yes
