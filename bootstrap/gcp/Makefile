@@ -23,7 +23,7 @@ create: /usr/local/bin/gcloud api_service_account
 		--template main.jinja \
 		--automatic-rollback-on-error; \
 	fi
-	PUBLIC_IP=`gcloud compute instances describe devenv --format=json | \
+	PUBLIC_IP=`/usr/local/bin/gcloud compute instances describe devenv --format=json | \
 		  python -c "import json, sys; print(json.loads(sys.stdin.read())['networkInterfaces'][0]['accessConfigs'][0]['natIP'])"`; \
 		  echo "Public IP: $$PUBLIC_IP";
 
