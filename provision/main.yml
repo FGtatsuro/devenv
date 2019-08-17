@@ -9,6 +9,13 @@
       #   - https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#special-variables
       #   - https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-complex-variable-data
       when: "'jp' in group_names"
+    - name: Install Snapper
+      apt:
+        name: snapd
+        update_cache: yes
+        cache_valid_time: 3600
+        install_recommends: no
+      become: yes
   roles:
     - role: FGtatsuro.ssh_config
   tasks:
