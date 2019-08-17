@@ -29,7 +29,6 @@ Public IP: <external IP of GCP compute engine instance>
 $ vi inventory/host_vars/devenv_gcp.yml
 ...
 ---
-# TODO: Use static IP
 ansible_host: <external IP of GCP compute engine instance>
 ```
 
@@ -60,6 +59,13 @@ $ make gcp/ssh
 ```bash
 $ make gcp/preview
 $ make gcp/update
+```
+
+### Use VPN connection
+
+```bash
+$ gcloud compute scp fujiistorage_gmail_com@devenv:~/client.ovpn .
+$ open client.ovpn
 ```
 
 ## VM

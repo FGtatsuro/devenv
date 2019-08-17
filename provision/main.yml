@@ -85,5 +85,9 @@
         packages:
           - jq
           - socat
+    - name: Install OpenVPN client
+      homebrew_cask:
+        name: tunnelblick
+        update_homebrew: yes
 - name: GCP specified play
   import_playbook: gcp.yml

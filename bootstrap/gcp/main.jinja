@@ -10,6 +10,7 @@ resources:
     machineType: f1-micro
     network: {{ NETWORK_NAME }}
     subnetwork: {{ NETWORK_NAME }}-sub
+    externalIP: {{ NETWORK_NAME }}-externalip
     serviceAccount: {{ SERVICE_ACCOUNT }}
 - name: {{ NETWORK_NAME }}
   type: network.jinja
@@ -22,6 +23,10 @@ resources:
   type: firewall.jinja
   properties:
     network: {{ NETWORK_NAME }}
+- name: {{ NETWORK_NAME }}-externalip
+  type: externalip.jinja
+  properties:
+    region: {{ REGION }}
 - name: {{ SERVICE_ACCOUNT }}
   type: serviceaccount.jinja
   properties:

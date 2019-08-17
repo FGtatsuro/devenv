@@ -1,0 +1,11 @@
+info:
+  title: devenv external IP
+  author: Tatsuro Fujii
+  description: Create an external IP address for devenv
+  version: 1.0
+
+properties:
+  region:
+    type: string
+    description: region for devenv
+    default: us-west1

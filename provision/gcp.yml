@@ -27,3 +27,5 @@
         marker_begin: "gcloud settings: BEGIN"
         marker_end: "gcloud settings: END"
         create: yes
+    - name: Setup settings related to VPN
+      import_tasks: openvpn.yml

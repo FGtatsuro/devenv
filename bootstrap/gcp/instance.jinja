@@ -28,14 +28,19 @@ resources:
       boot: true
       autoDelete: true
       initializeParams:
-        sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
     networkInterfaces:
     - network: $(ref.{{ properties["network"] }}.selfLink)
       subnetwork: $(ref.{{ properties["subnetwork"] }}.selfLink)
       # Access Config required to give the instance a public IP address
       accessConfigs:
       - name: External NAT
+        natIP: $(ref.{{ properties["externalIP"] }}.address)
         type: ONE_TO_ONE_NAT
+    canIpForward: true
+    tags:
+      items:
+      - https-server
     serviceAccounts:
     - email: $(ref.{{ properties["serviceAccount"] }}.email)
       scopes:
