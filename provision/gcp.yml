@@ -22,6 +22,7 @@
           stat:
             path: /etc/bash_completion.d/kubectl
           register: result
+        # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
         - name: Create kubectl completion file
           command: /bin/bash -lc  "kubectl completion bash > /etc/bash_completion.d/kubectl"
           when: not result.stat.exists
