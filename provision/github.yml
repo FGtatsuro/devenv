@@ -1,4 +1,11 @@
 ---
+- name: Install git
+  apt:
+    name: git
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  become: yes
 - name: Set Github owner settings
   git_config:
     name: "{{ item.key }}"
