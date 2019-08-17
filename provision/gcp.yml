@@ -25,5 +25,13 @@
             cache_valid_time: 3600
             install_recommends: no
           become: yes
+        - name: Check whether kubectl completion file exists
+          stat:
+            path: /etc/bash_completion.d/kubectl
+          register: result
+        - name: Create kubectl completion file
+          command: /bin/bash -lc  "kubectl completion bash > /etc/bash_completion.d/kubectl"
+          when: not result.stat.exists
+          become: yes
     - name: Setup settings related to VPN
       import_tasks: openvpn.yml
