@@ -1,22 +1,41 @@
 ---
-# https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
-- name: Add the repository of Neovim
-  apt_repository:
-    repo: "ppa:neovim-ppa/stable"
-    update_cache: yes
+- name: Check whether Neovim is installed
+  command: "which nvim"
+  register: result
+  changed_when: no
+  ignore_errors: yes
+- name: Install Veovim
+  block:
+    - name: Get Neovim archive
+      unarchive:
+        src: "{{ archive_url }}"
+        dest: "{{ archive_tmp_dir }}"
+        remote_src: yes
+    - name: Copy Neovim under user bin directory
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        remote_src: yes
+        mode: a+x
+      with_items: "{{ install_files }}"
+    - name: Remove Neovim archive
+      file:
+        path: /tmp/nvim-linux64
+        state: absent
+  vars:
+    archive_url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+    archive_tmp_dir: /tmp
+    install_files:
+      - { src: "{{ archive_tmp_dir }}/nvim-linux64/bin/nvim", dest: "/usr/local/bin" }
+      - { src: "{{ archive_tmp_dir }}/nvim-linux64/share/", dest: "/usr/local/share" }
   become: yes
-- name: Install Neovim
-  apt:
-    name: neovim
-    update_cache: yes
-    cache_valid_time: 3600
-    install_recommends: no
+  when: result.rc != 0
   become: yes
 - name: Update symlinks related to vi/vim
   alternatives:
     name: "{{ item.name }}"
     link: "{{ item.link }}"
-    path: /usr/bin/nvim
+    path: /usr/local/bin/nvim
     priority: 60
   with_items:
     - { name: "vi", link: "/usr/bin/vi" }

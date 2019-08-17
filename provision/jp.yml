@@ -45,4 +45,5 @@
       - bionic-security main restricted
       - bionic-security universe
       - bionic-security multiverse
+  when: "ansible_distribution == 'Ubuntu'"
   become: yes
