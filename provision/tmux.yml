@@ -2,6 +2,16 @@
 - name: Install tmux
   import_role:
     name: FGtatsuro.tmux
+- name: Add tmux config about prefix key
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.tmux.conf"
+    block: |
+      set -g prefix C-q
+      bind C-q send-prefix
+      unbind C-b
+    create: yes
+    marker_begin: "prefix settings: BEGIN"
+    marker_end: "prefix settings: END"
 - name: Add profile settings to run tmux on terminal startup
   blockinfile:
     path: "{{ ansible_env.HOME }}/.profile"
