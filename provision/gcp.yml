@@ -17,13 +17,21 @@
       # verbose log of 'go get' is written not in stdout, but in stderr.
       changed_when: "'(download)' in result.stderr"
     - name: Add completion settings of GCP CLI
-      blockinfile:
-        path: "{{ ansible_env.HOME }}/.profile"
-        block: |
-          # The next line enables shell command completion for gcloud.
-          . /usr/share/google-cloud-sdk/completion.bash.inc
-        marker_begin: "gcloud settings: BEGIN"
-        marker_end: "gcloud settings: END"
-        create: yes
+      block:
+        - name: Install bash completion libraries to resolve dependencies of GCP CLI
+          apt:
+            name: bash-completion
+            update_cache: yes
+            cache_valid_time: 3600
+            install_recommends: no
+          become: yes
+        - name: Check whether kubectl completion file exists
+          stat:
+            path: /etc/bash_completion.d/kubectl
+          register: result
+        - name: Create kubectl completion file
+          command: /bin/bash -lc  "kubectl completion bash > /etc/bash_completion.d/kubectl"
+          when: not result.stat.exists
+          become: yes
     - name: Setup settings related to VPN
       import_tasks: openvpn.yml
