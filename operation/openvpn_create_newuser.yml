@@ -1,0 +1,27 @@
+---
+- hosts: gcp
+  tasks:
+    - name: Check when OpenVPN install script exists
+      stat:
+        path: "{{ ansible_env.HOME }}/openvpn-install.sh"
+      register: result
+    - name: Setup OpenVPN user
+      block:
+        # Ref. https://docs.ansible.com/ansible/latest/modules/pause_module.html#pause-module
+        - name: Input OpenVPN client name
+          pause:
+            prompt: "Client name: "
+          register: client_name
+        - name: Create a new user to connect OpenVPN server
+          shell: "MENU_OPTION=1 CLIENT={{ client_name.user_input }} PASS=1 {{ ansible_env.HOME }}/openvpn-install.sh"
+          args:
+            executable: /bin/bash
+          become: yes
+          # lookup plugin works on a machine where playbook executes, thus we can use it to get current directory on local.
+          # FYI: https://docs.ansible.com/ansible/latest/plugins/lookup.html
+        - name: Download a created OpenVPN settings
+          fetch:
+            src: "{{ ansible_env.HOME }}/{{ client_name.user_input }}.ovpn"
+            dest: "{{ lookup('env', 'PWD') }}/"
+            flat: yes
+      when: result.stat.exists
