@@ -23,4 +23,5 @@
     packages:
       - peco
       - xsel
+      - less
   become: yes
