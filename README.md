@@ -66,6 +66,14 @@ $ make gcp/update
 ```bash
 $ gcloud compute scp fujiistorage_gmail_com@devenv:~/client.ovpn .
 $ open client.ovpn
+
+# When we want to use multiple connections(devices), we can create a new user.
+$ make gcp/openvpn/create_user
+  (input client name)
+$ ls -1 .
+...
+(client name).ovpn
+...
 ```
 
 ## VM
