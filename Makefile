@@ -67,3 +67,10 @@ gcp/destroy:
 
 gcp/ssh: ssh-add
 	make -C bootstrap/gcp ssh
+
+.PHONY: gcp/openvpn/create_user
+gcp/openvpn/create_user:
+	.venv_devenv/bin/ansible-playbook \
+		operation/openvpn_create_newuser.yml \
+		-i inventory/hosts \
+		-l devenv_gcp
