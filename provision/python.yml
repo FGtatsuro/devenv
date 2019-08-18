@@ -32,3 +32,11 @@
       - ipython
     executable: "{{ pip3_executable }}"
     extra_args: --user
+- name: Set PATH for python related binaries under user home
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    block: |
+      export PATH=~/.local/bin:$PATH
+    marker_begin: "Python env vars: BEGIN"
+    marker_end: "Python env vars: END"
+    create: yes
