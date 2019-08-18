@@ -8,15 +8,11 @@
     - name: Get OpenVPN install script
       get_url:
         url: https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
-        dest: /tmp/openvpn-install.sh
+        dest: "{{ ansible_env.HOME }}/openvpn-install.sh"
         mode: a+x
     - name: Run OpenVPN install script
-      shell: "AUTO_INSTALL=y /tmp/openvpn-install.sh"
+      shell: "AUTO_INSTALL=y {{ ansible_env.HOME }}/openvpn-install.sh"
       args:
         executable: /bin/bash
-    - name: Remove OpenVPN install script
-      file:
-        path: /tmp/openvpn-install.sh
-        state: absent
   when: not result.stat.exists
   become: yes
