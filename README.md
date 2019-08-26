@@ -4,9 +4,11 @@ My development environment
 
 ## Support platform
 
-- OSX (localhost)
-   - Ubuntu (workspace on GCP)
+- OSX (provisioning host)
+   - Debian (workspace on GCP)
    - Ubuntu (workspace on VM)
+- Debian (provisioning host)
+   - Debian (workspace on GCP)
 
 ## Requirements
 
