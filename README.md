@@ -18,6 +18,15 @@ My development environment
 
 ## GCP
 
+### Requirements(GCP)
+
+- Google Cloud SDK(gcloud)
+
+```bash
+# Check whether requirements are met
+$ make gcp/doctor
+```
+
 ### Bootstrap
 
 ```bash
