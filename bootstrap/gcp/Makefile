@@ -1,5 +1,4 @@
-.PHONY: deploy start stop restart destroy ssh doctor create api_service_account preview update
-
+.PHONY: doctor
 doctor:
 	@if [ -z "`which gcloud`" ]; then \
 		printf "\33[31m%s\33[0m\n" "gcloud doesn't exist on PATH. 👿"; \
@@ -8,6 +7,7 @@ doctor:
 	@printf "\33[32m%s\33[0m\n" "gcloud: OK"
 	@printf "\33[32m%s\33[0m\n" "ALL OK! Let's start! 🌟"
 
+.PHONY: api_service_account create preview update destroy
 api_service_account:
 	PROJECT_INFO=`gcloud projects list --format=json | \
 		python -c "import json, sys; print(json.dumps([p for p in json.loads(sys.stdin.read()) if p['name'] == 'devenv'][0]))"`; \
@@ -46,6 +46,13 @@ update:
 		gcloud deployment-manager deployments update devenv; \
 	fi
 
+destroy:
+	rc=`gcloud deployment-manager deployments describe devenv > /dev/null 2>&1; echo $$?`; \
+	if [ $$rc -eq 0 ]; then \
+		gcloud deployment-manager deployments delete devenv; \
+	fi
+
+.PHONY: start stop restart
 start:
 	gcloud compute instances start devenv
 
@@ -54,11 +61,6 @@ stop:
 
 restart: stop start
 
-destroy:
-	rc=`gcloud deployment-manager deployments describe devenv > /dev/null 2>&1; echo $$?`; \
-	if [ $$rc -eq 0 ]; then \
-		gcloud deployment-manager deployments delete devenv; \
-	fi
-
+.PHONY: ssh
 ssh:
 	gcloud compute ssh devenv --ssh-flag='-A'
