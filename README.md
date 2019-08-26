@@ -12,7 +12,7 @@ My development environment
 
 ## Requirements
 
-- Homebrew
+- Homebrew (Only OSX)
 - Make
 - Key pair for Github access
    - `~/.ssh/id_rsa`
