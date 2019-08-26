@@ -4,13 +4,15 @@ My development environment
 
 ## Support platform
 
-- OSX (localhost)
-   - Ubuntu (workspace on GCP)
+- OSX (provisioning host)
+   - Debian (workspace on GCP)
    - Ubuntu (workspace on VM)
+- Debian (provisioning host)
+   - Debian (workspace on GCP)
 
 ## Requirements
 
-- Homebrew
+- Homebrew (Only OSX)
 - Make
 - Key pair for Github access
    - `~/.ssh/id_rsa`
