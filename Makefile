@@ -43,7 +43,7 @@ vm/destroy:
 vm/ssh:
 	make -C bootstrap/vagrant ssh
 
-.PHONY: gcp/create gcp/start gcp/stop gcp/restart gcp/destroy gcp/ssh gcp/doctor
+.PHONY: gcp/create gcp/preview gcp/update gcp/start gcp/stop gcp/restart gcp/destroy gcp/ssh gcp/doctor
 gcp/create:
 	make -C bootstrap/gcp create
 

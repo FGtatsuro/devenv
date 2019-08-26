@@ -1,4 +1,4 @@
-.PHONY: deploy start stop restart destroy ssh doctor
+.PHONY: deploy start stop restart destroy ssh doctor create api_service_account preview update
 
 doctor:
 	@if [ -z "`which gcloud`" ]; then \
