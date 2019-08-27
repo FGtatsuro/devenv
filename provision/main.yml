@@ -96,5 +96,15 @@
       homebrew_cask:
         name: tunnelblick
         update_homebrew: yes
+    - name: Karabiner-Elements settings
+      block:
+        - name: Install Karabiner-Elements
+          homebrew_cask:
+            name: karabiner-elements
+            update_homebrew: yes
+        - name: Install custom rules
+          copy:
+            src: "../resources/karabiner/ctrl_m.json"
+            dest: "{{ ansible_env.HOME }}/.config/karabiner/assets/complex_modifications/"
 - name: GCP specified play
   import_playbook: gcp.yml
