@@ -69,6 +69,14 @@
         create: yes
         marker_begin: "bash settings: BEGIN"
         marker_end: "bash settings: END"
+    - name: Add profile settings for X Window System
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.bash_profile"
+        block: |
+          export DISPLAY=:0.0
+        create: yes
+        marker_begin: "X Window System settings: BEGIN"
+        marker_end: "X Window System settings: END"
     - name: Install Google Cloud SDK
       homebrew_cask:
         name: google-cloud-sdk
@@ -95,6 +103,10 @@
     - name: Install OpenVPN client
       homebrew_cask:
         name: tunnelblick
+        update_homebrew: yes
+    - name: Install X Window System
+      homebrew_cask:
+        name: xquartz
         update_homebrew: yes
     - name: Karabiner-Elements settings
       block:
