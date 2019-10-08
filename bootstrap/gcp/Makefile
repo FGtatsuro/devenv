@@ -63,4 +63,4 @@ restart: stop start
 
 .PHONY: ssh
 ssh:
-	gcloud compute ssh devenv --ssh-flag='-A'
+	gcloud compute ssh devenv --ssh-flag='-A $(EXTRA_SSH_FLAGS)'

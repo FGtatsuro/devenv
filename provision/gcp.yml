@@ -29,3 +29,10 @@
           become: yes
     - name: Setup settings related to VPN
       import_tasks: openvpn.yml
+    - name: Setup settings related to X Window System
+      apt:
+        name: xauth
+        update_cache: yes
+        cache_valid_time: 3600
+        install_recommends: no
+      become: yes
