@@ -123,3 +123,11 @@ $ make vm/restart
 ```bash
 $ make vm/ssh
 ```
+
+## k8s Cluster on GKE
+
+### Setup
+
+```bash
+$ make cluster # Select create task via Peco
+```

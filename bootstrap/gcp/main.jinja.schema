@@ -11,3 +11,4 @@ imports:
 - path: firewall.jinja
 - path: externalip.jinja
 - path: serviceaccount.jinja
+- path: api.jinja
