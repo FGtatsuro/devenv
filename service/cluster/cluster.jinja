@@ -1,0 +1,34 @@
+# FYI: https://github.com/GoogleCloudPlatform/deploymentmanager-samples/blob/master/google/resource-snippets/container-v1/gke_provider_cluster.jinja
+
+resources:
+- name: {{ env["name"] }}
+  type: gcp-types/container-v1:projects.zones.clusters
+  properties:
+    zone: {{ properties["zone"] }}
+    cluster:
+      name: {{ env["name"] }}
+      initialClusterVersion: "{{ properties['clusterVersion'] }}"
+      locations:
+      - {{ properties["zone"] }}
+      nodePools:
+        - name: {{ env["name"] }}-preemptible
+          initialNodeCount: 3
+          config:
+            diskSizeGb: 10
+            machineType: {{ properties["machineTypePreemptible"] }}
+            preemptible: true
+          autoscaling:
+            enabled: true
+            minNodeCount: 3
+            maxNodeCount: 5
+          management:
+            autoUpgrade: true
+            autoRepair: true
+        - name: {{ env["name"] }}-stable
+          initialNodeCount: 1
+          config:
+            diskSizeGb: 10
+            machineType: {{ properties["machineType"] }}
+          management:
+            autoUpgrade: true
+            autoRepair: true
