@@ -1,0 +1,22 @@
+---
+- name: Install Node.js
+  snap:
+    name: node
+    classic: yes
+    channel: 12/stable
+  become: yes
+- name: Install shared libraries for many node applications
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    install_recommends: no
+  vars:
+    packages:
+      - libglib2.0-0
+      - libnss3
+      - libgdk-pixbuf2.0-0
+      - libgtk-3-0
+      - libxss1
+      - libasound2
+  become: yes

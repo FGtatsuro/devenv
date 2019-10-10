@@ -31,6 +31,8 @@
       import_tasks: python.yml
     - name: Setup Golang environment
       import_tasks: golang.yml
+    - name: Setup Node.js environment
+      import_tasks: nodejs.yml
     - name: Setup Github
       import_tasks: github.yml
     - name: Setup vim
