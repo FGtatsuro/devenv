@@ -1,0 +1,7 @@
+resources:
+{% for api in properties["apis"] %}
+- name: {{ env["name"] }}-{{ api }}
+  type: gcp-types/serviceusage-v1:virtualService
+  properties:
+    name: projects/{{ env["project_number"] }}/services/{{ api }}
+{% endfor %}

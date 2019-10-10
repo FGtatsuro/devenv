@@ -36,3 +36,8 @@ resources:
     - roles/iam.serviceAccountUser
     - roles/compute.admin
     - roles/serviceusage.serviceUsageAdmin
+- name: devenv-api
+  type: api.jinja
+  properties:
+    apis:
+    - container.googleapis.com
