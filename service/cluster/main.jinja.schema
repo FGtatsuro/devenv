@@ -1,0 +1,8 @@
+info:
+  title: k8s cluster on devenv
+  author: Tatsuro Fujii
+  description: Create GKE resources for several services
+  version: 1.0
+
+imports:
+- path: cluster.jinja
