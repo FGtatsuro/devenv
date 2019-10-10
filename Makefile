@@ -80,3 +80,7 @@ gcp/openvpn/create_user:
 		operation/openvpn_create_newuser.yml \
 		-i inventory/hosts \
 		-l devenv_gcp
+
+.PHONY: cluster
+cluster:
+	@(make -C service/cluster `cat service/cluster/Makefile | egrep '^[-_/0-9a-zA-Z]+:' | sed s/:.*$$//g | peco`)
