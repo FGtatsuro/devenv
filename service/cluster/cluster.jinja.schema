@@ -1,0 +1,28 @@
+info:
+  title: GKE cluster
+  author: Tatsuro Fujii
+  description: Create a cluster on GKE
+  version: 1.0
+
+required:
+  - zone
+
+properties:
+  zone:
+    type: string
+    description: zone cluster runs
+
+  machineType:
+    type: string
+    description: machine type of cluster nodes
+    default: f1-micro
+
+  machineTypePreemptible:
+    type: string
+    description: machine type of cluster nodes (Preemptible VM)
+    default: g1-small
+
+  clusterVersion:
+    type: string
+    description: k8s version of this cluster
+    default: "1.14"

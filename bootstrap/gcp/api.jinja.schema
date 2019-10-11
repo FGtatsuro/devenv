@@ -1,0 +1,13 @@
+info:
+  title: devenv enabled APIs
+  author: Tatsuro Fujii
+  description: Enable service APIs for devenv
+  version: 1.0
+
+required:
+  - apis
+
+properties:
+  apis:
+    type: array
+    description: APIs enabled on devenv

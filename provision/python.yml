@@ -11,6 +11,7 @@
       - python3-setuptools
       - python3-wheel
       - python3-venv
+      - python3-dev
   become: yes
 - name: Check whether pip3 exists under user home
   stat:
