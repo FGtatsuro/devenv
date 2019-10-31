@@ -35,6 +35,9 @@ resources:
     - roles/deploymentmanager.editor
     - roles/iam.serviceAccountUser
     - roles/compute.admin
+    - roles/cloudbuild.builds.editor
+    - roles/storage.admin
+    - roles/viewer
 - name: devenv-api
   type: api.jinja
   properties:
