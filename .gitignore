@@ -13,3 +13,5 @@ inventory/host_vars/*
 
 todo
 *.ovpn
+
+.DS_Store
