@@ -39,6 +39,9 @@ resources:
     - roles/storage.admin
     - roles/viewer
     - roles/pubsub.editor
+    - roles/cloudfunctions.developer
+    googleapi_agent_roles:
+    - roles/resourcemanager.projectIamAdmin
 - name: devenv-api
   type: api.jinja
   properties:
