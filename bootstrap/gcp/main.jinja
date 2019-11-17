@@ -43,6 +43,8 @@ resources:
     - roles/cloudkms.cryptoKeyEncrypterDecrypter
     googleapi_agent_roles:
     - roles/resourcemanager.projectIamAdmin
+    cloudbuild_agent_roles:
+    - roles/cloudkms.cryptoKeyDecrypter
 - name: devenv-api
   type: api.jinja
   properties:
