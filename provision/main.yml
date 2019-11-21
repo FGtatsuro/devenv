@@ -18,6 +18,7 @@
       become: yes
   roles:
     - role: FGtatsuro.ssh_config
+    - role: FGtatsuro.terraform
   tasks:
     - name: Create a workspace directory
       file:
@@ -46,6 +47,7 @@
 - hosts: localhost
   roles:
     - role: FGtatsuro.tmux
+    - role: FGtatsuro.terraform
   tasks:
     # TODO: Handle this task in tmux role.
     - name: Copy tmux settings
