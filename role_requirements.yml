@@ -2,3 +2,4 @@
 - src: FGtatsuro.docker_toolbox
 - src: FGtatsuro.ssh_config
 - src: FGtatsuro.tmux
+- src: FGtatsuro.terraform
