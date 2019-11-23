@@ -2,6 +2,7 @@ resources:
 - name: devenv-cluster
   type: cluster.jinja
   properties:
-    zone: us-west1-a
-    machineType: f1-micro
-    machineTypePreemptible: g1-small
+    zone: us-east1-b
+    nodeConfig:
+      machineType: g1-small
+      preemptible: true

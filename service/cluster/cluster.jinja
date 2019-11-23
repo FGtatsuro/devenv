@@ -2,33 +2,34 @@
 
 resources:
 - name: {{ env["name"] }}
-  type: gcp-types/container-v1:projects.zones.clusters
+  type: gcp-types/container-v1beta1:projects.locations.clusters
   properties:
-    zone: {{ properties["zone"] }}
+    parent: projects/{{ env["project"] }}/locations/{{ properties["zone"] }}
     cluster:
       name: {{ env["name"] }}
       initialClusterVersion: "{{ properties['clusterVersion'] }}"
       locations:
-      - {{ properties["zone"] }}
+        - {{ properties["zone"] }}
+      addonsConfig:
+        cloudRunConfig:
+          disabled: false
+        horizontalPodAutoscaling:
+          disabled: false
+        httpLoadBalancing:
+          disabled: false
+        istioConfig:
+          disabled: false
       nodePools:
         - name: {{ env["name"] }}-preemptible
           initialNodeCount: 3
           config:
             diskSizeGb: 10
-            machineType: {{ properties["machineTypePreemptible"] }}
-            preemptible: true
+            machineType: {{ properties["nodeConfig"]["machineType"] }}
+            preemptible: {{ properties["nodeConfig"]["preemptible"] }}
           autoscaling:
             enabled: true
             minNodeCount: 3
             maxNodeCount: 5
-          management:
-            autoUpgrade: true
-            autoRepair: true
-        - name: {{ env["name"] }}-stable
-          initialNodeCount: 1
-          config:
-            diskSizeGb: 10
-            machineType: {{ properties["machineType"] }}
           management:
             autoUpgrade: true
             autoRepair: true
