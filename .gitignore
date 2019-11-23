@@ -12,6 +12,8 @@ inventory/host_vars/*
 .dep_*
 
 todo
+tmp*
+memo
 *.ovpn
 
 .DS_Store
