@@ -13,6 +13,15 @@
     path: "{{ ansible_env.HOME }}/.bashrc"
     regexp: "^HISTFILESIZE="
     state: absent
+# https://stackoverflow.com/questions/791765
+- name: Add forward history search settings
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    block: |
+      stty -ixon
+    create: yes
+    marker_begin: "Forward history search settings: BEGIN"
+    marker_end: "Forward history search settings: END"
 - name: Install command line utilities
   apt:
     name: "{{ packages }}"
