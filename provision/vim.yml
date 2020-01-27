@@ -31,11 +31,20 @@
   become: yes
   when: result.rc != 0
   become: yes
+
+- name: Set Neovim path(from archive)
+  set_fact:
+    neovim_path: "/usr/local/bin/nvim"
+  when: result.rc != 0
+- name: Set Neovim path(not archive)
+  set_fact:
+    neovim_path: "{{ result.stdout }}"
+  when: result.rc == 0
 - name: Update symlinks related to vi/vim
   alternatives:
     name: "{{ item.name }}"
     link: "{{ item.link }}"
-    path: /usr/local/bin/nvim
+    path: "{{ neovim_path }}"
     priority: 60
   with_items:
     - { name: "vi", link: "/usr/bin/vi" }
