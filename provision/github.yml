@@ -13,7 +13,7 @@
     scope: global
   with_items:
     - { key: "user.name", value: "FGtatsuro" }
-    - { key: "user.email", value: "fujiistorage@gmail.com" }
+    - { key: "user.email", value: "204491+FGtatsuro@users.noreply.github.com" }
 
 - name: Install hub command
   command: /bin/bash -lc "go get -v github.com/github/hub"
