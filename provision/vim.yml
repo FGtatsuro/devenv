@@ -4,7 +4,7 @@
   register: result
   changed_when: no
   ignore_errors: yes
-- name: Install Veovim
+- name: Install Neovim
   block:
     - name: Get Neovim archive
       unarchive:
