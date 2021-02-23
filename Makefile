@@ -1,11 +1,8 @@
-/usr/local/bin/python2:
-	brew install python@2
+/usr/local/bin/python3:
+	brew install python
 
-/usr/local/bin/virtualenv: /usr/local/bin/python2
-	/usr/local/bin/pip2 install virtualenv
-
-.venv_devenv: /usr/local/bin/virtualenv
-	/usr/local/bin/virtualenv -p /usr/local/bin/python2 .venv_devenv
+.venv_devenv: /usr/local/bin/python3
+	/usr/local/bin/python3 -m venv .venv_devenv
 
 .venv_devenv/bin/ansible: .venv_devenv
 	.venv_devenv/bin/pip install ansible
